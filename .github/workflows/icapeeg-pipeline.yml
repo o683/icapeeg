@@ -8,7 +8,7 @@ on:
 
 jobs:
   build_and_run:
-    runs-on: ubuntu-latest  # Use a Linux runner
+    runs-on: [self-hosted, egirna@egirna]  # Use a Linux runner
 
     steps:
       - name: Checkout code
