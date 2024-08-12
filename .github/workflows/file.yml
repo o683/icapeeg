@@ -1,0 +1,26 @@
+name: deployment workflow
+on:
+   push:
+    branches: [master]
+
+    jobs:
+      job_one :
+       name: deploy
+       runs_on: ubunto-latest
+       steps:
+       name: testing egirna server ssh connection
+       uses: appleboy/ssh-action@master
+       with:
+         host: egirna
+         username: egirna
+         key: ${{ Egirna_Github_Secret }}
+         port: 22311
+         script:
+         cd egirna@egirna
+         git pull origin master 
+         git status
+         
+         
+         
+       
+       
