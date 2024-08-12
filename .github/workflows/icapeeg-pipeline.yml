@@ -20,7 +20,7 @@ jobs:
         with:
          host: egirna
          username: egirna
-         key: ${{ EGIRNA_GITHUB_SECRET }}
+         key: ${{ secrets.EGIRNA_GITHUB_SECRET }}
          port: 22311
          
          
