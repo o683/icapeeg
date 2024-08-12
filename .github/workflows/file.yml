@@ -15,10 +15,7 @@ on:
          username: egirna
          key: ${{ EGIRNA_GITHUB_SECRET }}
          port: 22311
-         script:
-         cd egirna@egirna
-         git pull origin master 
-         git status
+         
          
          
          
