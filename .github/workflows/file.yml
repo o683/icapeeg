@@ -6,7 +6,7 @@ on:
     jobs:
       job_one :
        name: deploy
-       runs_on: ubunto-latest
+       runs_on: egirna@egirna
        steps:
        name: testing egirna server ssh connection
        uses: appleboy/ssh-action@master
