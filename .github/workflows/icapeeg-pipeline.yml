@@ -2,9 +2,9 @@ name: icapeg Setup and Run (Bash Script)
 
 on:
   push:
-    branches: [ main ]  # Trigger on pushes to the main branch
-  pull_request:
-    branches: [ main ]  # Also trigger on pull requests to the main branch
+    branches: master # Trigger on pushes to the main branch
+ # pull_request:
+   # branches: [ main ]  # Also trigger on pull requests to the main branch
 
 jobs:
   build_and_run:
