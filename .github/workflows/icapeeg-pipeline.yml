@@ -20,6 +20,6 @@ jobs:
           go-version: '1.21' # Or specify the Go version you need
 
       - name: Run setup script
-        run: |
+        script: |
           chmod +x setup_icapeg.sh  # Make the script executable
           ./setup_icapeg.sh         # Execute the script
