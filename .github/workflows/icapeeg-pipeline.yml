@@ -7,7 +7,7 @@ on:
 
 jobs:
   build_and_run:
-    runs-on:  egirna@egirna
+    runs-on: self-hosted, egirna 
       
     
 
