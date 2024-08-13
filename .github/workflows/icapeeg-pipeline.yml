@@ -7,7 +7,7 @@ on:
 
 jobs:
   build_and_run:
-    runs-on: self-hosted, egirna 
+    runs-on: ssh -i ${{ secrets.EGIRNA_GITHUB_SECRET}} egirna@egirna ' 
       
     
 
