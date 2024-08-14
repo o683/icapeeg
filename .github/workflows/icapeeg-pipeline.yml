@@ -21,8 +21,8 @@ jobs:
         run: |
           if [[ -z "$http_proxy" && -z "$https_proxy" ]]; then
             echo "Proxy server environment variables are not set. Configuring proxy..."
-            export http_proxy="http://your_proxy_server:proxy_port"
-            export https_proxy="http://your_proxy_server:proxy_port"
+            export http_proxy="http://squid:31213"
+            export https_proxy="http://squid:31213"
             echo "Proxy server configured. Please ensure your proxy server is running."
           fi
         env:
