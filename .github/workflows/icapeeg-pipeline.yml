@@ -3,7 +3,7 @@ name: ICAPeg Setup and Execution
 on:
   push:
     branches:
-      - main  # Trigger the pipeline on pushes to the main branch
+      - master  # Trigger the pipeline on pushes to the main branch
 
 jobs:
   build-and-run:
