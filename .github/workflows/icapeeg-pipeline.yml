@@ -1,38 +1,49 @@
-name: icapeg Setup and Run (Bash Script)
+name: ICAPeg Setup and Execution
 
 on:
   push:
-    branches: master # Trigger on pushes to the main branch
-
+    branches:
+      - main  # Trigger the pipeline on pushes to the main branch
 
 jobs:
-  build_and_run:
-    runs-on: ssh -i ${{ secrets.EGIRNA_GITHUB_SECRET}} egirna@egirna ' 
-      
-    
+  build-and-run:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: testing egirna server ssh connection
-        uses: appleboy/ssh-action@master
-        with:
-         host: egirna
-         username: egirna
-         key: ${{ secrets.EGIRNA_GITHUB_SECRET }}
-         port: 22311
-         
-         
-
       - name: Set up Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v3
         with:
-          go-version: '1.21' # Or specify the Go version you need
+          go-version: '^1.16'  # Install Go 1.16 or later
 
-      - name: Run setup script
+      - name: Configure proxy (if needed)
         run: |
-          chmod +x setup_icapeg.sh  # Make the script executable
-          ./setup_icapeg.sh         # Execute the script
+          if [[ -z "$http_proxy" && -z "$https_proxy" ]]; then
+            echo "Proxy server environment variables are not set. Configuring proxy..."
+            export http_proxy="http://your_proxy_server:proxy_port"
+            export https_proxy="http://your_proxy_server:proxy_port"
+            echo "Proxy server configured. Please ensure your proxy server is running."
+          fi
+        env:
+          your_proxy_server: ${{ secrets.PROXY_SERVER }}  # Store proxy details in GitHub secrets
+          proxy_port: ${{ secrets.PROXY_PORT }}
+
+      - name: Clone ICAPeg repository (if not present)
+        run: |
+          if [ ! -d "icapeg" ]; then
+            git clone https://github.com/egirna/icapeg.git
+          else
+            echo "icapeg repository already exists. Skipping cloning."
+          fi
+
+      - name: Build ICAPeg
+        run: go build .
+        working-directory: icapeg
+
+      - name: Run ICAPeg
+        run: ./icapeg -port 1344  # Use default port or get it from input if needed
+        working-directory: icapeg
 
     
